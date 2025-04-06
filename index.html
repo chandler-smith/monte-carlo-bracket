@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monte Carlo Masters Bracket</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .player {
+      padding: 10px 15px;
+      background-color: #dceefb;
+      border: 1px solid #0077cc;
+      border-radius: 5px;
+      cursor: grab;
+      width: fit-content;
+    }
+    .bracket {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .matchup {
+      width: 150px;
+      min-height: 50px;
+      background-color: #fff;
+      border: 2px dashed #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Monte Carlo Masters 2025 - Drag & Drop Bracket</h1>
+<p>Drag a player's name into a matchup box to build your bracket!</p>
+
+<div class="container" id="players">
+  <div class="player" draggable="true">A. Zverev</div>
+  <div class="player" draggable="true">M. Navone</div>
+  <div class="player" draggable="true">M. Berrettini</div>
+  <div class="player" draggable="true">J. Lehecka</div>
+  <div class="player" draggable="true">S. Korda</div>
+  <div class="player" draggable="true">Y. Bu</div>
+  <div class="player" draggable="true">L. Musetti</div>
+  <div class="player" draggable="true">H. Rune</div>
+  <div class="player" draggable="true">N. Borges</div>
+  <div class="player" draggable="true">L. Sonego</div>
+  <div class="player" draggable="true">P. Martinez</div>
+  <div class="player" draggable="true">N. Djokovic</div>
+  <div class="player" draggable="true">S. Wawrinka</div>
+  <div class="player" draggable="true">A. Tabilo</div>
+  <div class="player" draggable="true">V. Vacherot</div>
+  <div class="player" draggable="true">J. Struff</div>
+  <div class="player" draggable="true">G. Dimitrov</div>
+  <div class="player" draggable="true">N. Jarry</div>
+  <div class="player" draggable="true">D. Medvedev</div>
+  <div class="player" draggable="true">K. Khachanov</div>
+  <div class="player" draggable="true">C. Alcaraz</div>
+  <div class="player" draggable="true">R. Gasquet</div>
+  <div class="player" draggable="true">F. Fognini</div>
+  <div class="player" draggable="true">F. Cerundolo</div>
+  <!-- Add more players as needed -->
+</div>
+
+<h2>Your Bracket</h2>
+<div class="bracket">
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div class="matchup" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+
+<script>
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  document.querySelectorAll('.player').forEach(p => {
+    p.addEventListener('dragstart', ev => {
+      ev.dataTransfer.setData("text", ev.target.innerText);
+    });
+  });
+
+  function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    ev.target.innerHTML = `<div class='player'>${data}</div>`;
+  }
+</script>
+
+</body>
+</html>
